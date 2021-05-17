@@ -8,19 +8,26 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\STCor\\.nuget\\packages\\": {}
+    "C:\\Users\\STCor\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Cartella Utente\\Documenti\\GitProject\\GiocodellaSIgaretta\\GIocodellaSigaretta\\GIocodellaSigaretta.csproj",
+      "projectUniqueName": "D:\\STCorp-cartella utenti\\Documenti\\Repository\\GiocodellaSigaretta\\GIocodellaSigaretta.csproj",
       "projectName": "GIocodellaSigaretta",
-      "projectPath": "D:\\Cartella Utente\\Documenti\\GitProject\\GiocodellaSIgaretta\\GIocodellaSigaretta\\GIocodellaSigaretta.csproj",
+      "projectPath": "D:\\STCorp-cartella utenti\\Documenti\\Repository\\GiocodellaSigaretta\\GIocodellaSigaretta.csproj",
       "packagesPath": "C:\\Users\\STCor\\.nuget\\packages\\",
-      "outputPath": "D:\\Cartella Utente\\Documenti\\GitProject\\GiocodellaSIgaretta\\GIocodellaSigaretta\\obj\\",
+      "outputPath": "D:\\STCorp-cartella utenti\\Documenti\\Repository\\GiocodellaSigaretta\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
         "C:\\Users\\STCor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -60,7 +67,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
