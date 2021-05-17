@@ -10,29 +10,29 @@ namespace GIocodellaSigaretta
             Game Rules = new Game();
             Console.WriteLine("Hello World!");
             Console.WriteLine("In quanti siete a giocare? da " + Rules.minPlayer + " a " + Rules.maxPlayer);
-            Rules.numPlayer = insertNumPlayers(Rules.numPlayer);
+            insertNumPlayers();
             howToPlay();
-            Rules.namePlayers = insertNamePlayers(Rules.namePlayers);
+            insertNamePlayers();
             Console.WriteLine("Ok Iniziamo il gioco:");
             Console.ReadLine();
             Console.Clear();
             listQuestionTakeAnswer();
         }
-        public static int insertNumPlayers(int defaulNumPlayer)
+        public static void insertNumPlayers()
         {
             Game Rules = new Game();
-            int numPlayer;
-            numPlayer = Convert.ToInt32(Console.ReadLine());
-            while(numPlayer < Rules.minPlayer || numPlayer > Rules.maxPlayer)
+            int numPlayers;
+            numPlayers = Convert.ToInt32(Console.ReadLine());
+            while(numPlayers < Rules.minPlayer || numPlayers > Rules.maxPlayer)
             {
-                if(numPlayer > Rules.deadlineNumPlayer)
+                if(numPlayers > Rules.deadlineNumPlayer)
                 {
                     Console.WriteLine("E la mado', ma quanti siete? Metteteve la mascherina se no vi prendo a calci");
                 }
-                Console.WriteLine("Mi spiace ma non si può giocare in " + numPlayer + ". Dovete essere da " + Rules.minPlayer + " a " + Rules.maxPlayer);
-                numPlayer = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Mi spiace ma non si può giocare in " + numPlayers + ". Dovete essere da " + Rules.minPlayer + " a " + Rules.maxPlayer);
+                numPlayers = Convert.ToInt32(Console.ReadLine());
             }
-            return numPlayer;
+            Rules.numPlayer = numPlayers;
         }
         public static void howToPlay()
         {
@@ -53,19 +53,18 @@ namespace GIocodellaSigaretta
                     Console.WriteLine("Dovete rispondere si o no. Mo vi attaccate vi chiamero' a turno e non dovete sbirciare quello che scrivete");
                     break;
             }
-
         }
-        public static List<string> insertNamePlayers (List<string> defaultNamePlayer)
+        public static void insertNamePlayers()
         {
             Game Rules = new Game();
             string namePlayer;
+            Console.WriteLine("OK inserite i vostri nomi");
             for(int i = 0; i < Rules.numPlayer; i ++)
             {
                 Console.WriteLine("OK tocca al " + i + "* tra di voi");
                 namePlayer = Console.ReadLine();
                 Rules.namePlayers.Add(namePlayer);
             }
-            return Rules.namePlayers;
         }
         public static void listQuestionTakeAnswer ()
         {
@@ -86,7 +85,7 @@ namespace GIocodellaSigaretta
     }
     public class Contents
     {
-        public string[] allQuestions = new string[15] { "Chi?", "Con Chi?", "Cosa fanno?", "Dove?", "Perchè?", "Ma sopra o sotto?", "Chi ha vinto?", "Chi ha perso?", "Infine?", "Ma perchè proprio sta cosa?", "Chi lo ha fatto a chi?", "Sì, ma perche?", "Chi lo ha fatto con Silvio Berlusconi?", "Come l'ha presa?", "Chi e' stato con Maria De Filippi" };
+        public string[] allQuestions = new string[15] { "Chi?", "Con Chi?", "Cosa fanno?", "Dove?", "Perchè?", "Ma sopra o sotto?", "Chi ha vinto?", "Chi ha perso?", "Infine?", "Ma perchè proprio sta cosa?", "Chi lo ha fatto a chi?", "Sì, ma perche?", "Chi lo ha fatto con Silvio Berlusconi?", "Come l'ha presa?", "Chi e' stato con Maria De Filippi?" };
         public List<string> allAnswers = new List<string>();
     }
     public class Game
