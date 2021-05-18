@@ -7,33 +7,36 @@ namespace GIocodellaSigaretta
     {
         static void Main(string[] args)
         {
-            Game Rules = new Game();
-            Contents gameContents = new Contents();
+            SystemGame Informations = new SystemGame();
+            //dichiarazione delle variabili di game
+            int MinPlayersPossible = Informations.minPlayer;
+            int MaxPlayersAvailable = Informations.maxPlayer;
+            int DeadlinePlayerAvailable = Informations.deadlineNumPlayer;
             Console.WriteLine("Hello World!");
-            Console.WriteLine("In quanti siete a giocare? da " + Rules.minPlayer + " a " + Rules.maxPlayer);
-            insertNumPlayers();
+            Console.WriteLine("In quanti siete a giocare? da " + MinPlayersPossible + " a " + MaxPlayersAvailable);
+            NumberOfPlayers Number = new NumberOfPlayers(InsertNumPlayers(MinPlayersPossible, MaxPlayersAvailable, DeadlinePlayerAvailable));
+            int NumPlayerSelected = Number.GetNumPlayers();
             howToPlay();
-            insertNamePlayers();
+            Player InfoPlayer = new Player(InsertPlayersNames(NumPlayerSelected));
             Console.WriteLine("Ok Iniziamo il gioco:");
             Console.ReadLine();
             Console.Clear();
-            listQuestionTakeAnswer();
+            Answer Contents = new Answer(ListQuestionsTakingAnswers(Informations.allQuestions, InfoPlayer.GetPlayerNames()));
         }
-        public static void insertNumPlayers()
+        public static int InsertNumPlayers(int min, int max, int limit)
         {
-            Game Rules = new Game();
             int numPlayers;
             numPlayers = Convert.ToInt32(Console.ReadLine());
-            while(numPlayers < Rules.minPlayer || numPlayers > Rules.maxPlayer)
+            while(numPlayers < min || numPlayers > max)
             {
-                if(numPlayers > Rules.deadlineNumPlayer)
+                if(numPlayers > limit)
                 {
                     Console.WriteLine("E la mado', ma quanti siete? Metteteve la mascherina se no vi prendo a calci");
                 }
-                Console.WriteLine("Mi spiace ma non si può giocare in " + numPlayers + ". Dovete essere da " + Rules.minPlayer + " a " + Rules.maxPlayer);
+                Console.WriteLine("Mi spiace ma non si può giocare in " + numPlayers + ". Dovete essere da " + min + " a " + max);
                 numPlayers = Convert.ToInt32(Console.ReadLine());
             }
-            Rules.SetnumPlayer(numPlayers);
+            return numPlayers;
         }
         public static void howToPlay()
         {
@@ -55,86 +58,82 @@ namespace GIocodellaSigaretta
                     break;
             }
         }
-        public static void insertNamePlayers()
+        public static List<string> InsertPlayersNames(int selectednum)
         {
-            Game Rules = new Game();
-            string namePlayer;
+            List<string> PlayersNames = new List<string>();
+            string UserInput;
             Console.WriteLine("OK inserite i vostri nomi");
-            for(int i = 0; i < Rules.GetnumPlayer(); i ++)
+            for(int i = 0; i < selectednum; i ++)
             {
                 Console.WriteLine("OK tocca al " + i + "* tra di voi");
-                namePlayer = Console.ReadLine();
-                Rules.SetnamePlayers(namePlayer);
+                UserInput = Console.ReadLine();
+                PlayersNames.Add(UserInput);
             }
+            return PlayersNames;
         }
-        public static void listQuestionTakeAnswer ()
+        public static List<string> ListQuestionsTakingAnswers(List<string> questions, List<string> names)
         {
-            Game Rules = new Game();
-            Contents gameContent = new Contents();
+            List<string> PlayerAnswers = new List<string>();
+            string UserInput;
+            int SizeList = questions.Count;
             Random rand = new Random();
-            string answerPlayer;
-            for(int i = 0; i < gameContent.allQuestions.Length; i++)
+            for(int i = 0; i < SizeList ; i++)
             {
-                int j = rand.Next(i, gameContent.allQuestions.Length);
-                Console.WriteLine(gameContent.allQuestions[j]);
-                Console.WriteLine("risponde " + Rules.GetnamePlayers());
-                answerPlayer = Console.ReadLine();
-                gameContent.SetallAnswer(answerPlayer);
+                int j = rand.Next(i, SizeList);
+                Console.WriteLine(questions[j]);
+                Console.WriteLine("risponde " + names);
+                UserInput = Console.ReadLine();
+                PlayerAnswers.Add(UserInput);
                 Console.Clear();
             }
+            return PlayerAnswers;
+        }
+    }
+    class Answer
+    {
+        List<string> AllTheAnswers = new List<string>();
+        public Answer (string Answer)
+        {
+            AllTheAnswers.Add(Answer);
+        }
+        public List<string> GetAllTheAnswers()
+        {
+            return AllTheAnswers;
         }
     }
     class Player
     {
         List<string> PlayersNames = new List<string>();
-        List<string> AllTheAnswers = new List<string>();
-        public Player (string PlayerName, string Answer)
+        public Player (List<string> PlayersName)
         {
-            PlayersNames.Add(PlayerName);
-            AllTheAnswers.Add(Answer);
+            foreach(string Name in PlayersName)
+            {
+                PlayersNames.Add(Name);
+            }
+        }
+
+        public List<string> GetPlayerNames()
+        {
+            return PlayersNames;
         }
     }
-    public class Contents
+    public class NumberOfPlayers
     {
-        public string[] allQuestions = new string[15] { "Chi?", "Con Chi?", "Cosa fanno?", "Dove?", "Perchè?", "Ma sopra o sotto?", "Chi ha vinto?", "Chi ha perso?", "Infine?", "Ma perchè proprio sta cosa?", "Chi lo ha fatto a chi?", "Sì, ma perche?", "Chi lo ha fatto con Silvio Berlusconi?", "Come l'ha presa?", "Chi e' stato con Maria De Filippi?" };
-        private List<string> allAnswers = new List<string>();
-        public void SetallAnswer (string Answers)
+        int NumPlayers;
+        public NumberOfPlayers(int Number)
         {
-            allAnswers.Add(Answers);
+            NumPlayers = Number;
+        }
+        public int GetNumPlayers()
+        {
+            return NumPlayers;
         }
     }
-    public class Game
+    public class SystemGame
     {
-        public int minPlayer = 2;
-        public int maxPlayer = 12;
-        public int deadlineNumPlayer = 20;
-        private int numPlayer;
-        private List<string> namePlayers = new List<string>();
-        //creazione metodi per i campi
-        //i campi devono poter viaggiare senza alcun intoppo 
-        //prevedo, quindi l'uso di 2 metodi per ciascun campo
-        //un get e set per questi campi importanti
-
-        //metodi campo numPlayer
-        public int GetnumPlayer()
-        {
-            return numPlayer;
-        }
-
-        public void SetnumPlayer(int numPlayers)
-        {
-            numPlayer = numPlayers;
-        }
-
-        //metodi campo namePlayers
-        public List<string> GetnamePlayers()
-        {
-            return namePlayers;
-        }
-
-        public void SetnamePlayers(string Names)
-        {
-            namePlayers.Add(Names);
-        }
+        public readonly List<string> allQuestions = new List<string> { "Chi?", "Con Chi?", "Cosa fanno?", "Dove?", "Perchè?", "Ma sopra o sotto?", "Chi ha vinto?", "Chi ha perso?", "Infine?", "Ma perchè proprio sta cosa?", "Chi lo ha fatto a chi?", "Sì, ma perche?", "Chi lo ha fatto con Silvio Berlusconi?", "Come l'ha presa?", "Chi e' stato con Maria De Filippi?" };
+        public readonly int minPlayer = 2;
+        public readonly int maxPlayer = 12;
+        public readonly int deadlineNumPlayer = 20;
     }
 }
