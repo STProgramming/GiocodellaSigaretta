@@ -7,28 +7,38 @@ namespace GIocodellaSigaretta
     {
         static void Main(string[] args)
         {
-            SystemGame Informations = new SystemGame();
-            DateTime Clock = new DateTime();
-            //dichiarazione delle variabili di game
-            int MinPlayersPossible = Informations.minPlayer;
-            int MaxPlayersAvailable = Informations.maxPlayer;
-            int DeadlinePlayerAvailable = Informations.deadlineNumPlayer;
-            Console.WriteLine("--Gioco della sigaretta v1.0 Realizzato da Stefano Troisi--");
+            Console.WriteLine("--Gioco della sigaretta ver. commit Realizzato da Stefano Troisi--");
             Console.WriteLine("Github@STProgramming repository Giocodellasigaretta");
-            Greetings(Informations.Greeting, Clock.Hour);
-            Console.WriteLine("In quanti siete a giocare? da " + MinPlayersPossible + " a " + MaxPlayersAvailable);
-            NumberOfPlayers Number = new NumberOfPlayers(InsertNumPlayers(MinPlayersPossible, MaxPlayersAvailable, DeadlinePlayerAvailable));
-            int NumPlayerSelected = Number.GetNumPlayers();
-            howToPlay();
-            Player InfoPlayer = new Player(InsertPlayersNames(NumPlayerSelected));
-            Console.WriteLine("Ok Iniziamo il gioco:");
-            Console.ReadLine();
-            Console.Clear();
-            Answer Contents = new Answer(ListQuestionsTakingAnswers(Informations.allQuestions, InfoPlayer.GetPlayerNames()));
-            Console.WriteLine("Ok abbiamo finito il turno. Siete pronti per leggere la storia creata con tutte le vostre risposte? Dai che vi tagliate");
-            Console.ReadLine();
-            List<string> PlayersAnswers = Contents.GetAllTheAnswers();
-            ReturnAllTheStory(Informations.allQuestions, PlayersAnswers);
+            string UsersTryAgain = "si";
+            do
+            {
+                SystemGame Informations = new SystemGame();
+                DateTime Clock = new DateTime();
+                //dichiarazione delle variabili di game
+                int MinPlayersPossible = Informations.minPlayer;
+                int MaxPlayersAvailable = Informations.maxPlayer;
+                int DeadlinePlayerAvailable = Informations.deadlineNumPlayer;
+                //TODO FARE BENE IL CLOCK  PERCHE' STAMPA SEMPRE MEZZANOTTE dovrei provvedere ad inserire. Now
+                Greetings(Informations.Greeting, Clock.Hour);
+                Console.WriteLine("In quanti siete a giocare? da " + MinPlayersPossible + " a " + MaxPlayersAvailable);
+                NumberOfPlayers Number = new NumberOfPlayers(InsertNumPlayers(MinPlayersPossible, MaxPlayersAvailable, DeadlinePlayerAvailable));
+                int NumPlayerSelected = Number.GetNumPlayers();
+                howToPlay();
+                Player InfoPlayer = new Player(InsertPlayersNames(NumPlayerSelected));
+                Console.WriteLine("Ok Iniziamo il gioco:");
+                Console.ReadLine();
+                Console.Clear();
+                Answer Contents = new Answer(ListQuestionsTakingAnswers(Informations.allQuestions, InfoPlayer.GetPlayerNames(), NumPlayerSelected));
+                Console.WriteLine("Ok abbiamo finito il turno. Siete pronti per leggere la storia creata con tutte le vostre risposte? Dai che vi tagliate");
+                Console.ReadLine();
+                List<string> PlayersAnswers = Contents.GetAllTheAnswers();
+                ReturnAllTheStory(Informations.allQuestions, PlayersAnswers);
+                Console.WriteLine(Informations.CloseGreeting);
+                UsersTryAgain = Console.ReadLine();
+            }
+            while (UsersTryAgain == "si");
+            Console.WriteLine("Ciao alla prossima");
+
         }
         public static void Greetings(string greeting, int hour)
         {
@@ -42,15 +52,15 @@ namespace GIocodellaSigaretta
             string goodnight = "una buona nottata";
             string company = " con i tuoi amici.";
 
-            if (morging_start <= hour && hour > afternoon_start)
+            if (morging_start < hour && hour > afternoon_start)
             {
                 Console.WriteLine(greeting + goodmorning + company);
             }
-            else if (afternoon_start <= hour && hour > evening_start)
+            else if (afternoon_start < hour && hour > evening_start)
             {
                 Console.WriteLine(greeting + goodafternoon + company);
             }
-            else if (evening_start <= hour && hour > night_start)
+            else if (evening_start < hour && hour > night_start)
             {
                 Console.WriteLine(greeting + goodevening + company);
             }
@@ -70,6 +80,7 @@ namespace GIocodellaSigaretta
                     Console.WriteLine("E la mado', ma quanti siete? Metteteve la mascherina se no vi prendo a calci");
                 }
                 Console.WriteLine("Mi spiace ma non si può giocare in " + numPlayers + ". Dovete essere da " + min + " a " + max);
+                numPlayers = Convert.ToInt32(Console.ReadLine());
             }
             return numPlayers;
         }
@@ -100,32 +111,40 @@ namespace GIocodellaSigaretta
             Console.WriteLine("OK inserite i vostri nomi");
             for(int i = 1; i <= selectednum; i ++)
             {
-                Console.WriteLine("OK tocca al " + i + "* tra di voi");
+                Console.WriteLine("Tocca al " + i + "* tra di voi");
                 UserInput = Console.ReadLine();
                 PlayersNames.Add(UserInput);
             }
             return PlayersNames;
         }
-        public static List<string> ListQuestionsTakingAnswers(List<string> questions, List<string> names)
+        public static List<string> ListQuestionsTakingAnswers(List<string> questions, List<string> names, int sizelist)
         {
             List<string> PlayerAnswers = new List<string>();
+            int MajorSize = questions.Count;
             string UserInput;
-            int SizeList = questions.Count;
             Random rand = new Random();
-            //clico che stampa solo le domande
-            for(int i = 0; i < SizeList ; i++)
+            for(int i = 0; i < sizelist ; i++)
             {
-                int j = rand.Next(i, SizeList);
+                int j = rand.Next(i, MajorSize);
                 Console.WriteLine(questions[j]);
+                Console.WriteLine("Tocca a " + names[i]);
+                UserInput = Console.ReadLine();
+                while(String.IsNullOrEmpty(UserInput))
+                {
+                    Console.WriteLine("Stai a fa il timido ? Muoviti a rispondere");
+                    UserInput = Console.ReadLine();
+                }
+                Console.Clear();
             }
             return PlayerAnswers;
         }
         public static void ReturnAllTheStory(List<string> questions, List<string> answers)
         {
-            int SizeList = questions.Count;
+            //TODO creare un convertitore dove mi a salvare in una list tutti i j estratti e poi li vado a richiamare in fase di stampa
+            int SizeList = answers.Count;
             for(int i = 0 ; i < SizeList ; i++)
             {
-                Console.WriteLine(questions[i] + "\n" + answers[i]);
+                Console.WriteLine(answers[i]);
             }
         }
     }
@@ -176,8 +195,9 @@ namespace GIocodellaSigaretta
     {
         public readonly List<string> allQuestions = new List<string> { "Chi?", "Con Chi?", "Cosa fanno?", "Dove?", "Perchè?", "Ma sopra o sotto?", "Chi ha vinto?", "Chi ha perso?", "Infine?", "Ma perchè proprio sta cosa?", "Chi lo ha fatto a chi?", "Sì, ma perche?", "Chi lo ha fatto con Silvio Berlusconi?", "Come l'ha presa?", "Chi e' stato con Maria De Filippi?" };
         public readonly int minPlayer = 2;
-        public readonly int maxPlayer = 12;
+        public readonly int maxPlayer = 8;
         public readonly int deadlineNumPlayer = 20;
-        public string Greeting = ("Ciao benvenuto nel gioco della sigaretta impiccione. Niente gioca e passa ");
+        public string Greeting = ("Ciao e benvenuti nel gioco della sigaretta impiccione. Niente gioca e passa ");
+        public string CloseGreeting = ("Beh il gioco è terminato. Vi andrebbe un'altra partita?");
     }
 }
