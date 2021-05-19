@@ -52,6 +52,8 @@ namespace GIocodellaSigaretta
             string goodnight = "una buona nottata";
             string company = " con i tuoi amici.";
 
+            //comunque se stampa sempre mezzanotte il clock sono sicuro che l'algoritmo funziona perfettamente
+
             if (morging_start < hour && hour > afternoon_start)
             {
                 Console.WriteLine(greeting + goodmorning + company);
@@ -135,6 +137,7 @@ namespace GIocodellaSigaretta
                     UserInput = Console.ReadLine();
                 }
                 Console.Clear();
+                PlayerAnswers.Add(UserInput);
             }
             return PlayerAnswers;
         }
@@ -151,11 +154,11 @@ namespace GIocodellaSigaretta
     class Answer
     {
         List<string> AllTheAnswers = new List<string>();
-        public Answer (List<string> answer)
+        public Answer(List<string> PlayersAnswer)
         {
-            foreach(string content in answer)
+            foreach (string Name in PlayersAnswer)
             {
-                AllTheAnswers.Add(content);
+                AllTheAnswers.Add(Name);
             }
         }
         public List<string> GetAllTheAnswers()
@@ -198,6 +201,6 @@ namespace GIocodellaSigaretta
         public readonly int maxPlayer = 8;
         public readonly int deadlineNumPlayer = 20;
         public string Greeting = ("Ciao e benvenuti nel gioco della sigaretta impiccione. Niente gioca e passa ");
-        public string CloseGreeting = ("Beh il gioco è terminato. Vi andrebbe un'altra partita?");
+        public string CloseGreeting = ("\nBeh il gioco è terminato. Vi andrebbe un'altra partita?");
     }
 }
