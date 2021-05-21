@@ -23,11 +23,22 @@ namespace GIocodellaSigaretta
                 Console.WriteLine("In quanti siete a giocare? da " + MinPlayersPossible + " a " + MaxPlayersAvailable);
                 NumberOfPlayers Number = new NumberOfPlayers(InsertNumPlayers(MinPlayersPossible, MaxPlayersAvailable, DeadlinePlayerAvailable));
                 howToPlay();
+                int SelectedMode = GameModeSelect(Informations.NormalMode, Informations.AdventureMode);
                 Player InfoPlayer = new Player(InsertPlayersNames(Number.GetNumPlayers()));
                 Console.WriteLine("Ok Iniziamo il gioco:");
                 Console.ReadLine();
                 Console.Clear();
-                (List<string> answers, List<int> logquest) = ListQuestionsTakingAnswers(Informations.allQuestions, InfoPlayer.GetPlayerNames(), Number.GetNumPlayers());
+                List<string> answers = new List<string>();
+                List<int> logquest = new List<int>(); ListQuestionsTakingAnswers(Informations.allQuestions, InfoPlayer.GetPlayerNames());
+                if (SelectedMode == Informations.NormalMode)
+                {
+                    (answers, logquest) = ListQuestionsTakingAnswers(Informations.allQuestions, InfoPlayer.GetPlayerNames());
+                }
+                else
+                {
+                    int QuestionNumber = HowManyQuestions(Informations.TenQuestions, Informations.TwentyQuestions, Informations.ThirtyQuestion, Informations.NormalMode, Informations.AdventureMode);
+                    (answers, logquest) = ListRandomQuestionsTakingAnswers(Informations.allQuestions, InfoPlayer.GetPlayerNames(), QuestionNumber);
+                }
                 Answer Contents = new Answer(answers);
                 QuestionsLog Ids = new QuestionsLog(logquest);
                 Console.WriteLine("Ok abbiamo finito il turno. Siete pronti per leggere la storia creata con tutte le vostre risposte? Dai che vi tagliate");
@@ -38,7 +49,6 @@ namespace GIocodellaSigaretta
             }
             while (UsersTryAgain == "si");
             Console.WriteLine("Ciao alla prossima");
-
         }
         public static void Greetings(string greeting, int hour)
         {
@@ -111,6 +121,49 @@ namespace GIocodellaSigaretta
                     break;
             }
         }
+        public static int GameModeSelect(int NormalMode, int AdventureMode)
+        {
+            int ModeSelected = 0;
+            do
+            {
+                Console.WriteLine("Seleziona la modalità di gioco:\n 1) Per la modalità normale, 2) Per la modalità avventura");
+                try
+                {
+                    ModeSelected = Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("Inserisci solo numeri");
+                }
+            }
+            while (NormalMode > ModeSelected || ModeSelected > AdventureMode);
+            return ModeSelected;
+        }
+        public static int HowManyQuestions(int tenquestion, int twentyquestions, int thirtyquestions, int NormalMode, int AdventureMode)
+        {
+            int QuestionSelected = 0;
+            do
+            {
+                Console.WriteLine("Seleziona quante domande vuoi che vi vengano fatte:\n 1) 10 2) 20");
+                try
+                {
+                    QuestionSelected = Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("Inserisci solo numeri");
+                }
+            }
+            while (NormalMode > QuestionSelected || QuestionSelected > AdventureMode);
+            if(QuestionSelected == NormalMode)
+            {
+                return tenquestion;
+            }
+            else
+            {
+                return twentyquestions;
+            }
+        }
         public static List<string> InsertPlayersNames(int selectednum)
         {
             List<string> PlayersNames = new List<string>();
@@ -124,11 +177,42 @@ namespace GIocodellaSigaretta
             }
             return PlayersNames;
         }
-        public static (List<string>, List<int>) ListQuestionsTakingAnswers(List<string> questions, List<string> names, int sizelist)
+        public static (List<string>, List<int>) ListQuestionsTakingAnswers(List<string> questions, List<string> names)
         {
             List<string> PlayerAnswers = new List<string>();
             List<int> QuestionsExtraction = new List<int>();
-            int MajorSize = questions.Count;
+            int MajorSize = 6;
+            int sizelist = names.Count;
+            int x = 0;
+            string UserInput;
+            Random rand = new Random();
+            for (int i = 0; i < MajorSize; i++)
+            {
+                QuestionsExtraction.Add(i);
+                Console.WriteLine(questions[i]);
+                if(x == sizelist)
+                {
+                    x = 0;
+                }
+                Console.WriteLine("Tocca a " + names[x]);
+                x++;
+                do
+                {
+                    UserInput = Console.ReadLine();
+                    Console.WriteLine("Stai a fa il timido ? Muoviti a rispondere");
+                }
+                while (String.IsNullOrEmpty(UserInput));
+                Console.Clear();
+                PlayerAnswers.Add(UserInput);
+            }
+            return (PlayerAnswers, QuestionsExtraction);
+        }
+        public static (List<string>, List<int>) ListRandomQuestionsTakingAnswers(List<string> questions, List<string> names, int QuestionNumber)
+        {
+            List<string> PlayerAnswers = new List<string>();
+            List<int> QuestionsExtraction = new List<int>();
+            int MajorSize = QuestionNumber;
+            int sizelist = names.Count;
             int FirstInRow = 0;
             int x = 0;
             int j = 0;
@@ -234,13 +318,15 @@ namespace GIocodellaSigaretta
     }
     public class SystemGame
     {
-        public readonly List<string> allQuestions = new List<string> { "Chi?", "Con Chi?", "Cosa fanno?", "Dove?", "Perchè?", "Sopra o sotto?", "Chi ha vinto?", "Chi ha perso?", "In quale setta?", "Chi li minacciava?", "Come lo ha fatto?", "Per quale motivo ha dovuto seppellirlo?", "Chi lo ha fatto con Silvio Berlusconi?", "Come l'ha presa?", "Chi e' stato con Maria De Filippi?", "Perchè proprio Jerry Scotti?", "Perchè era storto?" };
+        public readonly List<string> allQuestions = new List<string> { "Chi?", "Con Chi?", "Cosa fanno?", "Dove?", "Quando?" , "Perchè?", "Sopra o sotto?", "Chi ha vinto?", "Chi ha perso?", "In quale setta?", "Chi li minacciava?", "Come lo ha fatto?", "Per quale motivo ha dovuto seppellirlo?", "Chi lo ha fatto con Silvio Berlusconi?", "Come l'ha presa?", "Chi e' stato con Maria De Filippi?", "Perchè proprio Jerry Scotti?", "Perchè era storto?", "Chi pensi che sia stato?", "Cosa pensi ci sia nella tasca di ", "Chi pensi sia stato ad uccidere l'uomo ragno?", "In quale posizione?" };
         public readonly int minPlayer = 2;
-        public readonly int maxPlayer = 8;
+        public readonly int maxPlayer = 6;
         public readonly int deadlineNumPlayer = 20;
-        public readonly int TeenQuestions = 10;
+        public readonly int TenQuestions = 10;
         public readonly int TwentyQuestions = 20;
         public readonly int ThirtyQuestion = 30;
+        public readonly int NormalMode = 1;
+        public readonly int AdventureMode = 2;
         public string Greeting = ("Ciao e benvenuti nel gioco della sigaretta impiccione. Niente gioca e passa ");
         public string CloseGreeting = ("\nBeh il gioco è terminato. Vi andrebbe un'altra partita?");
     }
