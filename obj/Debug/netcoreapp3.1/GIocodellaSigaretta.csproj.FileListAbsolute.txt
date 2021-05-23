@@ -24,3 +24,16 @@ D:\STCorp-cartella utenti\Documenti\Repository\GiocodellaSigaretta\bin\Debug\net
 D:\STCorp-cartella utenti\Documenti\Repository\GiocodellaSigaretta\bin\Debug\netcoreapp3.1\GIocodellaSigaretta.dll
 D:\STCorp-cartella utenti\Documenti\Repository\GiocodellaSigaretta\bin\Debug\netcoreapp3.1\GIocodellaSigaretta.pdb
 D:\STCorp-cartella utenti\Documenti\Repository\GiocodellaSigaretta\obj\Debug\netcoreapp3.1\GIocodellaSigaretta.genruntimeconfig.cache
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\bin\Debug\netcoreapp3.1\GIocodellaSigaretta.exe
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\bin\Debug\netcoreapp3.1\GIocodellaSigaretta.deps.json
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\bin\Debug\netcoreapp3.1\GIocodellaSigaretta.runtimeconfig.json
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\bin\Debug\netcoreapp3.1\GIocodellaSigaretta.runtimeconfig.dev.json
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\bin\Debug\netcoreapp3.1\GIocodellaSigaretta.dll
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\bin\Debug\netcoreapp3.1\GIocodellaSigaretta.pdb
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\obj\Debug\netcoreapp3.1\GIocodellaSigaretta.csprojAssemblyReference.cache
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\obj\Debug\netcoreapp3.1\GIocodellaSigaretta.AssemblyInfoInputs.cache
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\obj\Debug\netcoreapp3.1\GIocodellaSigaretta.AssemblyInfo.cs
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\obj\Debug\netcoreapp3.1\GIocodellaSigaretta.csproj.CoreCompileInputs.cache
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\obj\Debug\netcoreapp3.1\GIocodellaSigaretta.dll
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\obj\Debug\netcoreapp3.1\GIocodellaSigaretta.pdb
+D:\STCorp-cartella utenti\Documenti\Repository\giocodellasigaretta.gamemode\GiocodellaSigaretta\obj\Debug\netcoreapp3.1\GIocodellaSigaretta.genruntimeconfig.cache

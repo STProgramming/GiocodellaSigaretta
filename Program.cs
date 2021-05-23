@@ -8,7 +8,7 @@ namespace GIocodellaSigaretta
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("--Gioco della sigaretta 5th commit now in testing. Realizzato da Stefano Troisi--");
+            Console.WriteLine("--Gioco della sigaretta vers 1.0 ora in beta. Realizzato da Stefano Troisi--");
             Console.WriteLine("Github@STProgramming repository Giocodellasigaretta");
             string UsersTryAgain = "si";
             do
@@ -29,7 +29,7 @@ namespace GIocodellaSigaretta
                 Console.ReadLine();
                 Console.Clear();
                 List<string> answers = new List<string>();
-                List<int> logquest = new List<int>(); ListQuestionsTakingAnswers(Informations.allQuestions, InfoPlayer.GetPlayerNames());
+                List<int> logquest = new List<int>();
                 if (SelectedMode == Informations.NormalMode)
                 {
                     (answers, logquest) = ListQuestionsTakingAnswers(Informations.allQuestions, InfoPlayer.GetPlayerNames());
