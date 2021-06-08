@@ -318,7 +318,7 @@ namespace GIocodellaSigaretta
     }
     public class SystemGame
     {
-        public readonly List<string> allQuestions = new List<string> { "Chi?", "Con Chi?", "Cosa fanno?", "Dove?", "Quando?" , "Perchè?", "Sopra o sotto?", "Chi ha vinto?", "Chi ha perso?", "In quale setta?", "Chi li minacciava?", "Come lo ha fatto?", "Per quale motivo ha dovuto seppellirlo?", "Chi lo ha fatto con Silvio Berlusconi?", "Come l'ha presa?", "Chi e' stato con Maria De Filippi?", "Perchè proprio Jerry Scotti?", "Perchè era storto?", "Chi pensi che sia stato?", "Cosa pensi ci sia nella tasca di ", "Chi pensi sia stato ad uccidere l'uomo ragno?", "In quale posizione?" };
+        public readonly List<string> allQuestions = new List<string> { "Chi?", "Con Chi?", "Cosa fanno?", "Dove?", "Quando?" , "Perchè?", "Sopra o sotto?", "Chi ha vinto?", "Chi ha perso?", "In quale setta?", "Chi li minacciava?", "Come lo ha fatto?", "Per quale motivo ha dovuto seppellirlo?", "Chi lo ha fatto con Silvio Berlusconi?", "Come l'ha presa?", "Chi e' stato con Maria De Filippi?", "Perchè proprio Jerry Scotti?", "Perchè era storto?", "Chi pensi che sia stato?", "Cosa pensi ci sia nella tasca di Silvio?", "Chi pensi sia stato ad uccidere l'uomo ragno?", "In quale posizione?" };
         public readonly int minPlayer = 2;
         public readonly int maxPlayer = 6;
         public readonly int deadlineNumPlayer = 20;
